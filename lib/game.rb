@@ -26,7 +26,7 @@ class Game
       Game.new(game_type, @players)
     when "pc"
       player_name = Question.question_type_ask("Enter Player name: ", "name")
-      @players = Player.new(player_name, "X", "Computer"), Player.new("Computer", "O", "Computer")
+      @players = Player.new(player_name, "X", "Player"), Player.new("Computer", "O", "Computer")
       Game.new(game_type, @players)
     else
       puts "Invalid input. Please try"
