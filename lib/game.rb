@@ -44,8 +44,13 @@ class Game
         end
       end
       @players.each do |player|
-        puts player.score
+        puts "#{player.name}: #{player.score}"
+        if player.score == 100
+          puts "#{player.name} is big winner !!!!!!!!!!!"
+          return player
+        end
       end
+      @board = Board.create(3, 3)
     end
   end
 
