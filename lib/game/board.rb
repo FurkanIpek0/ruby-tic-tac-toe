@@ -36,7 +36,6 @@ class Board
   end
 
   def control_win_patterns(block = 0)
-    output = { win_status: true, player_type: 'X' }
     map_length = @board.length
     x, y = block[:coords]
     coords = cross_coords(x, y, map_length) + straight_coords(x, y, map_length)
