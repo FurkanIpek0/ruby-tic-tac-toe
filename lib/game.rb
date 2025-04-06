@@ -1,6 +1,8 @@
 require_relative 'game/player'
 require_relative 'game/board'
 
+# The Game class handles the main logic for the Tic-Tac-Toe game.
+# It manages the board, players, and game flow, including turns and win conditions.
 class Game
   def initialize(board, players, current_player, moves, game_type)
     @board = board
@@ -67,17 +69,11 @@ class Game
   def self.create_players(game_type)
     case game_type
     when 'pp'
-      player1_name = Player.name_input
-      player2_name = Player.name_input
-      [Player.create(player1_name, 'player', 'X'), Player.create(player2_name, 'player', 'O')]
+      [Player.create(Player.name_input, 'player', 'X'), Player.create(Player.name_input, 'player', 'O')]
     when 'pc'
-      player1_name = Player.name_input
-      computer1_name = 'Computer1'
-      [Player.create(player1_name, 'player', 'X'), Player.create(computer1_name, 'computer', 'O')]
+      [Player.create(Player.name_input, 'player', 'X'), Player.create('Computer1', 'computer', 'O')]
     when 'cc'
-      computer1_name = 'Computer1'
-      computer2_name = 'Computer2'
-      [Player.create(computer1_name, 'computer', 'X'), Player.create(computer2_name, 'computer', 'O')]
+      [Player.create('Computer1', 'computer', 'X'), Player.create('Computer2', 'computer', 'O')]
     end
   end
 end
