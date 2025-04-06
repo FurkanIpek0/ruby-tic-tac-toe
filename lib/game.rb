@@ -19,27 +19,32 @@ class Game
 
   def start_game
     loop do
-      puts @board.show
-      puts "#{@current_player.name}'s turn (#{@current_player.symbol}) \n"
-      coordinates = if @current_player.type == 'player'
-                      @current_player.player_move(@board.available_moves)
-                    else
-                      @current_player.computer_move(@board.available_moves)
-                    end
-      block = { coords: coordinates, player_type: @current_player.symbol }
-      @board.update(coordinates, @current_player.symbol)
-      @moves.push({ round: @moves.length + 1, player: @current_player.name, coordinates: coordinates })
-      if @board.control_win_patterns(block)
+      loop do
         puts @board.show
-        puts "#{@current_player.name} wins!"
-        @current_player.score += 1
-        break
-      elsif @board.available_moves.empty?
-        puts @board.show
-        puts 'It\'s a draw!'
-        break
-      else
-        @current_player = @current_player.switch_player(@players)
+        puts "#{@current_player.name}'s turn (#{@current_player.symbol}) \n"
+        coordinates = if @current_player.type == 'player'
+                        @current_player.player_move(@board.available_moves)
+                      else
+                        @current_player.computer_move(@board.available_moves)
+                      end
+        block = { coords: coordinates, player_type: @current_player.symbol }
+        @board.update(coordinates, @current_player.symbol)
+        @moves.push({ round: @moves.length + 1, player: @current_player.name, coordinates: coordinates })
+        if @board.control_win_patterns(block)
+          puts @board.show
+          puts "#{@current_player.name} wins!"
+          @current_player.score += 1
+          break
+        elsif @board.available_moves.empty?
+          puts @board.show
+          puts 'It\'s a draw!'
+          break
+        else
+          @current_player = @current_player.switch_player(@players)
+        end
+      end
+      @players.each do |player|
+        puts player.score
       end
     end
   end
